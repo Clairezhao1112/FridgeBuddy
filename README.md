@@ -29,6 +29,15 @@ I learned how to filter and sort recipes using specific parameters like cooking 
 - Displaying data:
 I realized that AI is really good at normalizing, designing and structuring data, something I found difficult to understand on my own. I prompted AI to make minor tweaks to the data mapping logic so that it would only display meaningful information. Claude suggested adding a large text box showing detailed recipe descriptions from each link but it was alot of words on a page, really complex of code so I removed it to improved the app flow. 
 ## Screenshots
-[Include at least one screenshot of your app]
+<p float="left">
+  <img src="./FridgeBuddy.png" width="49%" alt="Landing screen" />
+  <img src="./Healthy.png" width="49%" alt="Recipe results" />
+</p>
+
+<p float="left">
+  <img src="./Broke.png" width="49%" alt="Broke mood view" />
+  <img src="./Comfort.png" width="49%" alt="Comfort mood view" />
+</p>
+
 ## Future Improvements
 I think the current design of the app is quite simple and focused mainly on functionality. Since most of my time was spent on building and refining the backend logic, I’d like to invest more effort in creating a more engaging and visually appealing UI. In the future, I think it would be helpful to add dietary preference filters (e.g., vegan, gluten-free, keto) or cuisines(e.g.,Chinese, Japanese, American) to give users more personalized recipe results. Adding small feature such as "favorite" or "save recipe for future" options. 
