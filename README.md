@@ -15,12 +15,12 @@ FridgeBuddy is a React web application that takes your available ingredients and
 - Mood-Based Filtering: Choose a mood — Lazy, Broke, Healthy, Comfort, or Adventurous to tailor recipes by cooking time, price, diet, or popularity.
 - Recipe Results: Displays  how many ingredients you already have versus how many are missing. Each recipe includes a link to the full instructions on Spoonacular.
 ## Setup Instructions
-git clone https://github.com/Clairezhao1112/FridgeBuddy.git
-cd FridgeBuddy
-npm install
-VITE_SPOONACULAR_KEY=api_key_here
-npm run dev
-Open browser at http://localhost:5173
+1. git clone https://github.com/Clairezhao1112/FridgeBuddy.git
+    cd FridgeBuddy
+2. npm install
+3. VITE_SPOONACULAR_KEY=api_key_here
+4. npm run dev
+5. Open browser at [http://localhost:5173]
 ## AI Assistance
 - Breaking the project into components:
 I learned the importance of organizing code into smaller, reusable parts such as a Header, IngredientInput, MoodPicker, and RecipeResults component. This structure made it easier to manage individual sections of the app. Specifically, I in the ingredient input, I added simple logic to handle both uppercase and lowercase input, trimming extra spaces, and styling each ingredient as its own tag for future adjustments. This was helpful because it kept the app well-organized and made the overall interface cleaner and more user-friendly.
