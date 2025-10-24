@@ -1,5 +1,5 @@
 import React from "react";
-import { MOODS } from "../util/constants.js";
+import { MOODS } from "../utils/constants.js";
 
 export default function RecipeResults({ recipes, mood }) {
   if (!recipes) return null;
@@ -11,7 +11,10 @@ export default function RecipeResults({ recipes, mood }) {
       </div>
     );
   }
-
+  /* Displays a grid of recipe cards based on the fetched data.
+  Includes images, ingredient counts, and a link to each recipe
+  Handles cases where no recipes are found
+  */
   return (
     <div className="results-section">
       <h2 className="results-title">

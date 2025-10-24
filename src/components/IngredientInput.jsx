@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 
+//Split and normalize user input into indiviudal items
 export default function IngredientInput({ ingredients, setIngredients }) {
   const [text, setText] = useState("");
 
@@ -15,6 +16,7 @@ export default function IngredientInput({ ingredients, setIngredients }) {
     setIngredients(prev => prev.filter((_, i) => i !== index));
   };
 
+  // Displaying the input field and adding button/removable tags 
   return (
     <div className="input-section">
       <label className="input-label">What's in your fridge?</label>
@@ -30,7 +32,7 @@ export default function IngredientInput({ ingredients, setIngredients }) {
         />
         <button onClick={handleAdd} className="btn btn-add">Add</button>
       </div>
-
+      
       {ingredients.length > 0 && (
         <div className="ingredient-tags">
           {ingredients.map((ing, i) => (

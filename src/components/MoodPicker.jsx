@@ -1,5 +1,5 @@
 import React from "react";
-import { MOODS } from "../util/constants.js";
+import { MOODS } from "../utils/constants.js";
 
 export default function MoodPicker({ mood, setMood }) {
   return (

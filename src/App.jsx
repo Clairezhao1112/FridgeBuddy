@@ -3,64 +3,58 @@ import Header from "./components/Header.jsx";
 import IngredientInput from "./components/IngredientInput.jsx"; 
 import MoodPicker from "./components/MoodPicker.jsx";
 import RecipeResults from "./components/RecipeResults.jsx";
-import { MOODS } from "./util/constants.js";
+import { MOODS } from "./utils/constants.js";
+import { fetchRecipes } from "./utils/api.js";
 import "./App.css";
-
-console.log("App component loaded");
 
 export default function App() {
   const [ingredients, setIngredients] = useState([]);
   const [mood, setMood] = useState("");
-  const [recipes, setRecipes] = useState(null);
+  const [recipes, setRecipes] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
+  //Reset state when ingredients are cleared (no API call)
   useEffect(() => {
-    if (ingredients.length === 0) return; 
-
-    const apiKey = import.meta.env.VITE_SPOONACULAR_KEY;
-    if (!apiKey) {
-      setError("Missing API key in .env file (VITE_SPOONACULAR_KEY). Restart dev server after adding it.");
-      return;
+    if (ingredients.length === 0) {
+      setRecipes([]);
+      setError(null);
+      setLoading(false);
     }
+  }, [ingredients]);
 
-    const moodConfig = MOODS.find((m) => m.id === mood);
-    const params = new URLSearchParams({
-      ingredients: ingredients.join(","),
-      number: "20",
-      ranking: "1",
-      ignorePantry: "true",
-      apiKey,
-      ...(moodConfig?.filters || {}),
-    });
+  //Fetch new recipes when ingredients or mood change (calls fetchRecipes)
+  useEffect(() => {
+    if (ingredients.length === 0) return;
 
-    setLoading(true);
-    setError(null);
+    const getData = async () => {
+      try {
+        setLoading(true);
+        setError(null);
+        const results = await fetchRecipes(ingredients, mood, MOODS);
+        setRecipes(results);
+      } catch (e) {
+        setError(e.message || "Request failed");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-    fetch(`https://api.spoonacular.com/recipes/findByIngredients?${params}`)
-      .then((res) => (res.ok ? res.json() : Promise.reject(`API Error: ${res.status}`)))
-      .then((data) => setRecipes(Array.isArray(data) ? data.slice(0, 6) : []))
-      .catch((err) => setError(err.message || String(err)))
-      .finally(() => setLoading(false));
+    getData();
   }, [ingredients, mood]);
 
+  //Main app layout 
   return (
     <div className="app-container">
       <div className="app-wrapper">
         <Header />
-
-        <IngredientInput
-          ingredients={ingredients}
-          setIngredients={setIngredients}
-        />
-
+        <IngredientInput ingredients={ingredients} setIngredients={setIngredients} />
         <MoodPicker mood={mood} setMood={setMood} />
-
         {error && <div className="error-message">⚠️ {error}</div>}
         {loading && <div className="loading-message">🔍 Finding recipes...</div>}
-
         <RecipeResults recipes={recipes} mood={mood} />
       </div>
     </div>
   );
 }
+
